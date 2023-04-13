@@ -1,4 +1,4 @@
-.login-container {
+.login-card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,22 +7,18 @@
 
     background: #2d333b;
 
-    border: 2px solid var(--border);
+    border: var(--border);
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
+    border-radius: var(--border-radius);
 
     box-sizing: border-box;
 
-    padding: 1rem;
+    padding: 3rem;
 
-    width: 40%;
-    height: 300px;
-
-    max-width: 500px;
-    min-width: 300px;
+    width: 500px;
 }
 
-.login {
+.login-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,16 +27,47 @@
     width: 100%;
 }
 
-.login-box {
+.login {
     width: 80%;
 }
 
 .login input {
     border: none;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-color);
     border-radius: 0px;
     background-color: transparent;
     color: var(--fg-default);
     width: 100%;
     padding: 0.5rem;
+    margin-top: 0.5rem;
+    box-sizing: border-box;
+}
+
+.login-screen-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    min-height: 100vh;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .login-screen-container {
+        flex-direction: column-reverse;
+        justify-content: center;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .login-screen-container > .logo > img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .login-card {
+        width: max-content;
+    }
 }
