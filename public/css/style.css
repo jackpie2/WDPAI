@@ -1,0 +1,57 @@
+:root {
+    /* Colors */
+    --fg-default: #e6edf3;
+    --fg-muted: #7d8590;
+    --border-color: #444c56;
+    --bg-overlay: #2d333b;
+    --bg-inset: #1c2128;
+    --gold: #f1c40f;
+
+    /* Dimensions */
+    --border-radius: 5px;
+
+    /* Misc */
+    --border: 2px solid var(--border-color);
+}
+
+body {
+    background: linear-gradient(
+        135deg,
+        #7d3c98 0%,
+        #673ab7 48.44%,
+        #430fbf 100%
+    );
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    color: var(--fg-default);
+
+    height: 100%;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.2rem;
+
+    margin: 0;
+}
+
+.logo-large {
+    width: 300px;
+    height: 300px;
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+    vertical-align: middle;
+}
+
+.button {
+    background: #1c2128;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    color: var(--fg-default);
+    border: none;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
