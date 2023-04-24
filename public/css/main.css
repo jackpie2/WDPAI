@@ -1,24 +1,3 @@
-nav {
-    background-color: var(--bg-overlay);
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    width: 100%;
-    box-sizing: border-box;
-    justify-self: center;
-}
-
-nav > a > svg {
-    fill: var(--fg-default);
-}
-
-.main-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
 .search-bar-container {
     background-color: var(--bg-overlay);
     padding: 0.5rem;
@@ -73,14 +52,6 @@ nav > a > svg {
     padding: 0.5rem;
 }
 
-.content-container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-}
-
 .coffe-list {
     display: flex;
     flex-direction: column;
@@ -101,14 +72,11 @@ nav > a > svg {
     padding: 1rem;
     border-radius: var(--border-radius);
     background-color: var(--bg-overlay);
-    /* max-height: 200px; */
     height: 142px;
-    /* box-sizing: border-box; */
     align-items: center;
     border-style: solid;
     border-width: 2px;
     border: var(--border);
-    /* border: 2px solid var(--border); */
 }
 
 .coffe-image > img {
@@ -122,7 +90,6 @@ nav > a > svg {
 .coffe-content {
     display: flex;
     flex-direction: column;
-    /* gap: 0.5rem; */
     height: 100%;
 }
 
@@ -161,56 +128,4 @@ nav > a > svg {
 
 .filled > svg {
     fill: var(--gold);
-}
-
-.nagivation-bar-container {
-    width: auto;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.navigation-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    background-color: var(--bg-overlay);
-    border: var(--border);
-}
-
-.navigation-pages {
-    text-decoration: none;
-}
-
-.navigation-pages > a {
-    color: var(--fg-default);
-    text-decoration: none;
-}
-
-.navigation-button {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-
-    width: 6rem;
-    border-radius: var(--border-radius);
-    background-color: var(--bg-inset);
-    border: var(--border);
-    color: var(--fg-default);
-
-    flex-grow: 1;
-}
-
-.navigation-button:hover {
-    background-color: var(--bg-inset-hover);
-    cursor: pointer;
-}
-
-@media only screen and (max-width: 768px) {
-    nav {
-        order: 1;
-        margin-top: auto;
-    }
 }

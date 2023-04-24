@@ -1,19 +1,9 @@
-.login-card {
+.login-box {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     justify-self: left;
-
-    background: #2d333b;
-
-    border: var(--border);
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: var(--border-radius);
-
-    box-sizing: border-box;
-
-    padding: 3rem;
 
     width: 500px;
 }
@@ -67,7 +57,7 @@
         height: 150px;
     }
 
-    .login-card {
+    .login-box {
         width: max-content;
     }
 }
