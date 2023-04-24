@@ -141,3 +141,10 @@ nav > a > svg {
 
     padding: 3rem;
 }
+
+@media only screen and (max-width: 768px) {
+    nav {
+        order: 1;
+        margin-top: auto;
+    }
+}
