@@ -121,8 +121,12 @@
     color: var(--fg-muted);
 }
 
+.star {
+    display: flex;
+    align-items: center;
+}
+
 .star > svg {
-    vertical-align: middle;
     fill: var(--fg-muted);
 }
 
