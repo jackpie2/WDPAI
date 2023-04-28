@@ -147,4 +147,8 @@ nav > a > svg {
         order: 1;
         margin-top: auto;
     }
+
+    .box {
+        padding: 1rem;
+    }
 }
