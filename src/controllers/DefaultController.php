@@ -14,4 +14,14 @@ class DefaultController extends AppController
     {
         $this->render('main');
     }
+
+    public function product()
+    {
+        $this->render('product');
+    }
+
+    public function profile()
+    {
+        $this->render('profile');
+    }
 }

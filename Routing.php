@@ -6,7 +6,7 @@ class Router
 {
     public static $routes;
 
-    public static function get($url, $controller)
+    public static function set($url, $controller)
     {
         self::$routes[$url] = $controller;
     }
@@ -14,6 +14,10 @@ class Router
     public static function run($url)
     {
         $action = explode('/', $url)[0];
+
+        if ($action == "") {
+            $action = "main";
+        }
 
         if (!array_key_exists($action, self::$routes)) {
             die("Wrong URL");
