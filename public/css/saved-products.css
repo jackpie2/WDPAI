@@ -1,0 +1,19 @@
+.bookmark-container {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 100%;
+}
+
+.bookmark-container > a:hover {
+    background-color: var(--bg-inset-hover);
+    cursor: pointer;
+}
+
+.bookmark-container > a > svg {
+    fill: var(--purple);
+}
+
+.bookmark-container > a > svg:hover {
+    fill: var(--fg-muted);
+}
