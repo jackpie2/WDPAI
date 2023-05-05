@@ -14,5 +14,6 @@ Router::get('', 'DefaultController');
 
 Router::post('user_login', 'SecurityController');
 Router::post('user_logout', 'SecurityController');
+Router::post('user_register', 'SecurityController');
 
 Router::run($path);
