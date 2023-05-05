@@ -5,10 +5,10 @@ require 'Routing.php';
 $path = trim($_SERVER['REQUEST_URI'], '/');
 $path = parse_url($path, PHP_URL_PATH);
 
-Router::set('login', 'DefaultController');
-Router::set('main', 'DefaultController');
-Router::set('product', 'DefaultController');
-Router::set('profile', 'DefaultController');
-Router::set('saved', 'DefaultController');
-Router::set('', 'DefaultController');
+Router::get('login', 'DefaultController');
+Router::get('main', 'DefaultController');
+Router::get('product', 'DefaultController');
+Router::get('profile', 'DefaultController');
+Router::get('saved', 'DefaultController');
+Router::get('', 'DefaultController');
 Router::run($path);

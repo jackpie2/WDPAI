@@ -6,7 +6,7 @@ class Router
 {
     public static $routes;
 
-    public static function set($url, $controller)
+    public static function get($url, $controller)
     {
         self::$routes[$url] = $controller;
     }
