@@ -15,16 +15,14 @@ class Router
     {
         $action = explode('/', $url)[0];
 
-        if ($action == "") {
-            $action = "main";
-        }
-
         if (!array_key_exists($action, self::$routes)) {
             die("Wrong URL");
         }
 
         $controller = self::$routes[$action];
         $object = new $controller;
+        $action = $action ?: 'main';
+
         $object->$action();
     }
 }
