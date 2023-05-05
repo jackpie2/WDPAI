@@ -20,10 +20,11 @@ class SecurityController extends AppController
             $this->render('login', ['messages' => ['Wrong email or password. Try again.']]);
             return;
         }
-        
+
         session_start();
 
         $_SESSION["user"] = $user->getNickname();
+        $_SESSION["email"] = $user->getEmail();
         $_SESSION["role"] = "user";
 
         $url = "http://$_SERVER[HTTP_HOST]";
