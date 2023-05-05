@@ -10,7 +10,15 @@ class DefaultController extends AppController
         if ($this->isLoggedIn()) {
             $this->render('profile');
         }
-        $this->render('login');
+        $this->render('login', ['type' => 'login']);
+    }
+
+    public function register()
+    {
+        if ($this->isLoggedIn()) {
+            $this->render('profile');
+        }
+        $this->render('login', ['type' => 'register']);
     }
 
     public function main()
