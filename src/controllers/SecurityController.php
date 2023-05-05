@@ -39,4 +39,23 @@ class SecurityController extends AppController
 
         $this->render('main');
     }
+
+    public function user_register()
+    {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $confirmPassword = $_POST['confirm-password'];
+        $nickname = $_POST['nickname'];
+
+        if ($password !== $confirmPassword) {
+            $this->render('login', ['messages' => ['Passwords are not the same. Try again.'], 'type' => 'register']);
+            return;
+        }
+
+        $user = new User($email, $password, $nickname);
+
+        var_dump($user);
+
+        // TODO: add database logic here
+    }
 }
