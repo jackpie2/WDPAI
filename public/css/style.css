@@ -42,12 +42,16 @@ body {
     vertical-align: middle;
 }
 
-.button {
-    background: #1c2128;
+button {
     border-radius: var(--border-radius);
-    padding: 1rem;
+    background-color: var(--bg-inset);
+    border: var(--border);
     color: var(--fg-default);
-    border: none;
+}
+
+button:hover {
+    background-color: var(--bg-inset-hover);
+    cursor: pointer;
 }
 
 .container {
