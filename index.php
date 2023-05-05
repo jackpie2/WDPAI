@@ -9,5 +9,6 @@ Router::set('login', 'DefaultController');
 Router::set('main', 'DefaultController');
 Router::set('product', 'DefaultController');
 Router::set('profile', 'DefaultController');
+Router::set('saved', 'DefaultController');
 Router::set('', 'DefaultController');
 Router::run($path);

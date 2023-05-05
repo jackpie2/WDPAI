@@ -24,4 +24,9 @@ class DefaultController extends AppController
     {
         $this->render('profile');
     }
+
+    public function saved()
+    {
+        $this->render('saved-products');
+    }
 }
