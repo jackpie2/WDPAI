@@ -87,6 +87,25 @@
     border: none;
 }
 
+.alternative-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0.5rem;
+    font-size: 1rem;
+}
+
+.alternative-action > a {
+    color: var(--purple);
+    text-decoration: none;
+}
+
+.alternative-action > a:hover {
+    color: var(--fg-muted);
+}
+
 @media only screen and (max-width: 768px) {
     .login-screen-container {
         flex-direction: column-reverse;

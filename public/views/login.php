@@ -25,7 +25,23 @@
     </div>
     <div class="login-screen-container">
         <div class="login-box box">
-            <form class="login-form" action="user_login" method="post">
+            <form class="login-form" action="<?php
+                                                if (isset($type) && $type === 'register') {
+                                                    echo "user_register";
+                                                } else {
+                                                    echo "user_login";
+                                                }
+                                                ?>" method="post">
+                <?php
+                if (isset($type) && $type === 'register') {
+                    echo "
+                            <div class=\"login\">
+                                <span>Nickname</span>
+                                <input name=\"nickname\" type=\"text\" placeholder=\"nickname\" />
+                            </div>
+                        ";
+                }
+                ?>
                 <div class="login">
                     <span>Email</span>
                     <input name="email" type="text" placeholder="email@email.com" />
@@ -34,7 +50,42 @@
                     <span>Password</span>
                     <input name="password" type="password" placeholder="password" />
                 </div>
-                <button class="login-button" type="submit">Login</button>
+                <?php
+                if (isset($type) && $type === 'register') {
+                    echo "
+                            <div class=\"login\">
+                                <span>Confirm Password</span>
+                                <input name=\"confirm-password\" type=\"password\" placeholder=\"password\" />
+                            </div>
+                        ";
+                }
+                ?>
+                <button class="login-button" type="submit">
+                    <?php
+                    if (isset($type) && $type === 'register') {
+                        echo "Register";
+                    } else {
+                        echo "Login";
+                    }
+                    ?>
+                </button>
+                <?php
+                if (isset($type) && $type === 'register') {
+                    echo "
+                            <div class=\"alternative-action\">
+                                <span>Already have an account?</span>
+                                <a href=\"/login\">Login</a>
+                            </div>
+                        ";
+                } else {
+                    echo "
+                            <div class=\"alternative-action\">
+                                <span>Don't have an account?</span>
+                                <a href=\"/register\">Register</a>
+                            </div>
+                        ";
+                }
+                ?>
             </form>
         </div>
         <div class="logo">
