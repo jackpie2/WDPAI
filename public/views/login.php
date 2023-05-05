@@ -7,19 +7,26 @@
 </head>
 
 <body>
+    <div class="messages">
+        <?php
+        if (isset($messages)) {
+            foreach ($messages as $message) {
+                echo "
+                            <div class=\"message\">
+                                <div class=\"message-content\">
+                                    <span>$message</span>
+                                    <button class=\"message-close-button\">X</button>
+                                </div>
+                            </div>
+                        ";
+            }
+        }
+        ?>
+    </div>
     <div class="login-screen-container">
         <div class="login-box box">
             <form class="login-form" action="user_login" method="post">
                 <div class="login">
-                    <div class="messages">
-                        <?php
-                        if (isset($messages)) {
-                            foreach ($messages as $message) {
-                                echo $message;
-                            }
-                        }
-                        ?>
-                    </div>
                     <span>Email</span>
                     <input name="email" type="text" placeholder="email@email.com" />
                 </div>
