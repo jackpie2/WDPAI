@@ -7,6 +7,8 @@
     --bg-inset: #1c2128;
     --gold: #f1c40f;
     --purple: #986ee2;
+    --error-bg: rgb(250, 69, 73, 0.5);
+    --error-border: #a40e26;
 
     /* Dimensions */
     --border-radius: 5px;
