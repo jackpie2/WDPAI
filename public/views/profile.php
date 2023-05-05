@@ -47,13 +47,37 @@
         <div class="content-container">
             <div class="profile-box box">
                 <div class="profile-info">
+                <div class="profile-info-element">
+                        <h2>Username</h2>
+                        <span class="username">
+                            <?php
+                                if (isset($_SESSION['user'])) {
+                                    echo $_SESSION['user'];
+                                }
+                            ?>
+                        </span>
+                    </div>
                     <div class="profile-info-element">
                         <h2>Email</h2>
-                        <span class="email">email.com</span>
+                        <span class="email">
+                            <?php
+                                if (isset($_SESSION['email'])) {
+                                    echo $_SESSION['email'];
+                                }
+                            ?>
+                        </span>
                     </div>
                     <div class="profile-info-element">
                         <h2>Rated Products</h2>
-                        <span class="rated-products">123</span>
+                        <span class="rated-products">
+                            <?php
+                                if (isset($_SESSION['ratedProducts'])) {
+                                    echo $_SESSION['ratedProducts'];
+                                } else {
+                                    echo 0;
+                                }
+                            ?>
+                        </span>
                     </div>
                 </div>
                 <form class="logout-form" action="user_logout" method="post">
