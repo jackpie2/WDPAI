@@ -56,7 +56,12 @@
                         <span class="rated-products">123</span>
                     </div>
                 </div>
-                <button class="logout-button">Logout</button>
+                <form class="logout-form" action="user_logout" method="post">
+                    <button class="logout-button" 
+                        type="submit"
+
+                    >Logout</button>
+                </form>
             </div>
         </div>
     </div>
