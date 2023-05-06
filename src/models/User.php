@@ -21,7 +21,7 @@ class User
 
     public function getPassword(): string
     {
-        return md5($this->password);
+        return $this->password;
     }
 
     public function getNickname(): string
