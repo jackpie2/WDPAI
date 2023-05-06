@@ -2,13 +2,12 @@
 
 require_once 'AppController.php';
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../repository/UserRepository.php';
 
 class SecurityController extends AppController
 {
     public function user_login()
     {
-        $user = new User('test@email.com', 'admin', 'test');
-
         if (!$this->isPost()) {
             return $this->render('login');
         }
@@ -16,7 +15,10 @@ class SecurityController extends AppController
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        if ($user->getEmail() !== $email || $user->getPassword() !== md5($password)) {
+        $userRepository = new UserRepository();
+        $user = $userRepository->getUser($_POST['email']);
+
+        if (!$user || $user->getEmail() !== $email || $user->getPassword() !== md5($password)) {
             $this->render('login', ['messages' => ['Wrong email or password. Try again.']]);
             return;
         }
@@ -52,10 +54,22 @@ class SecurityController extends AppController
             return;
         }
 
-        $user = new User($email, $password, $nickname);
+        // check if the user already exists
 
-        var_dump($user);
+        $userRepository = new UserRepository();
 
-        // TODO: add database logic here
+        $user = $userRepository->getUser($email);
+
+        if ($user) {
+            $this->render('login', ['messages' => ['User with this email already exists. Try again.'], 'type' => 'register']);
+            return;
+        }
+
+        $newUser = new User($email, $password, $nickname);
+
+        $userRepository->addUser($newUser);
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/login");
     }
 }
