@@ -97,8 +97,7 @@
     font-size: 1.5rem;
 }
 
-.coffee-brand,
-.coffee-rating {
+.coffee-brand {
     font-size: 1rem;
 }
 
@@ -115,6 +114,7 @@
     display: flex;
     align-items: center;
     gap: 0.2rem;
+    font-size: 1rem;
 }
 
 .coffee-brand {
@@ -132,4 +132,23 @@
 
 .filled > svg {
     fill: var(--gold);
+}
+
+.no-results-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    background-color: var(--bg-overlay);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: var(--border);
+    width: auto;
+    max-width: 800px;
+}
+
+.product-link {
+    color: var(--fg-default);
+    text-decoration: none;
 }
