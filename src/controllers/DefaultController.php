@@ -1,7 +1,8 @@
 <?php
 
 require_once 'AppController.php';
-
+require_once __DIR__ . '/../models/Coffee.php';
+require_once __DIR__ . '/../repository/CoffeeRepository.php';
 
 class DefaultController extends AppController
 {
@@ -23,7 +24,27 @@ class DefaultController extends AppController
 
     public function main()
     {
-        $this->render('main');
+        $page = 1;
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+            if ($page < 1) {
+                $page = 1;
+            }
+        }
+
+        $coffeeRepository = new CoffeeRepository();
+        $pageData = $coffeeRepository->getAllCoffee($page);
+        $coffeeList = $pageData[0];
+        $totalPages = $pageData[1];
+
+        $this->render(
+            'main',
+            [
+                'coffee' => $coffeeList,
+                'page' => $page,
+                'totalPages' => $totalPages
+            ]
+        );
     }
 
     public function product()

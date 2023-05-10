@@ -184,7 +184,7 @@
             <div class="nagivation-bar-container">
                 <div class="navigation-bar">
                     <button class="navigation-button">
-                        << /button>
+                        < </button>
                             <div class="navigation-pages">
                                 <a href="#">1</a>
                                 <a href="#">2</a>
