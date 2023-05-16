@@ -49,7 +49,26 @@ class DefaultController extends AppController
 
     public function product()
     {
-        $this->render('product');
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+        }
+
+        if (!isset($id)) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/");
+            return;
+        }
+
+        $coffeeRepository = new CoffeeRepository();
+        $coffee = $coffeeRepository->getCoffee($id);
+
+        if ($coffee == null) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/");
+            return;
+        }
+
+        $this->render('product', ['coffee' => $coffee]);
     }
 
     public function profile()
@@ -62,5 +81,36 @@ class DefaultController extends AppController
     {
         $this->redirectIfNotLoggedIn();
         $this->render('saved-products');
+    }
+
+    public function rate()
+    {
+        if (!$this->isLoggedIn()) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/login");
+            return;
+        }
+
+        if (!$this->isPost()) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/");
+            return;
+        }
+
+        $id = $_POST['id'];
+        $coffeeRepository = new CoffeeRepository();
+
+        $coffee = $coffeeRepository->getCoffee($id);
+
+        if ($coffee == null) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/");
+            return;
+        }
+
+        $rating = $_POST['rating'];
+        $userID = $_SESSION['id'];
+
+        $coffeeRepository->rateCoffee($id, $rating, $userID);
     }
 }

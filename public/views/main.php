@@ -53,22 +53,14 @@
                     $name = $product->getName();
                     $description = $product->getDescription();
                     // $image_uuid = $product->getImage_uuid();
-                    $rating = $product->getRating();
+                    $rating = $product->getFormattedRating();
                     $id = $product->getId();
 
-                    if ($rating == 0) {
-                        $rating = "No rating";
-                    } else {
-                        $rating = $rating . "/5";
-                    }
+
 
                     $stars = $product->getRatingStars();
 
                     $brand = $product->getBrand();
-
-                    if ($brand == null) {
-                        $brand = "Unknown brand";
-                    }
 
                     echo "
                     <a class=\"product-link\" href=\"/product?id=$id\">
