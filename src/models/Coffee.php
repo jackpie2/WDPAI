@@ -1,29 +1,30 @@
 <?
 
+require_once __DIR__ . '/../repository/BrandRepository.php';
+
 class Coffee
 {
     private $id;
     private $name;
     private $description;
-    private $image_uuid;
+    private $image_file;
     private $rating;
     private $brand;
     private $review_count;
 
-    public function __construct(int $id, string $name, string $description, ?string $image_uuid, ?float $rating, ?string $brand, int $review_count)
-    {
-        $this->id = $id;
+    public function __construct(
+        string $name, string $description,
+        ?string $image_file, ?float $rating,
+        ?string $brand, int $review_count,
+        ?int $id = null
+    ) {
         $this->name = $name;
         $this->description = $description;
-        $this->image_uuid = $image_uuid;
+        $this->image_file = $image_file;
         $this->rating = $rating;
         $this->brand = $brand;
         $this->review_count = $review_count;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
+        $this->id = $id;
     }
 
     public function getName(): string
@@ -33,12 +34,12 @@ class Coffee
 
     public function getDescription(): string
     {
-        return  $this->description;
+        return $this->description;
     }
 
-    public function getImage_uuid(): string
+    public function getimage_file(): ?string
     {
-        return $this->image_uuid;
+        return $this->image_file;
     }
 
     public function getRating(): ?float
@@ -67,9 +68,9 @@ class Coffee
         $this->description = $description;
     }
 
-    public function setImage_uuid(string $image_uuid): void
+    public function setimage_file(string $image_file): void
     {
-        $this->image_uuid = $image_uuid;
+        $this->image_file = $image_file;
     }
 
     public function setRating(int $rating): void
@@ -122,5 +123,22 @@ class Coffee
     public function getReview_count(): int
     {
         return $this->review_count;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getBrandName(): string
+    {
+        $brandRepository = new BrandRepository();
+        $brand = $brandRepository->getBrand($this->brand);
+
+        if ($brand == null) {
+            return "Unknown brand";
+        }
+
+        return $brand->getName();
     }
 }

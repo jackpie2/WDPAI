@@ -2,7 +2,9 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="public/css/profile.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/product.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/add-product.css" />
     <title>BrewReview</title>
 </head>
 
@@ -39,45 +41,26 @@
             </a>
         </nav>
         <div class="content-container">
-            <div class="profile-box box">
-                <div class="profile-info">
-                    <div class="profile-info-element">
-                        <h2>Username</h2>
-                        <span class="username">
-                            <?php
-                            if (isset($_SESSION['user'])) {
-                                echo $_SESSION['user'];
-                            }
-                            ?>
-                        </span>
-                    </div>
-                    <div class="profile-info-element">
-                        <h2>Email</h2>
-                        <span class="email">
-                            <?php
-                            if (isset($_SESSION['email'])) {
-                                echo $_SESSION['email'];
-                            }
-                            ?>
-                        </span>
-                    </div>
-                    <div class="profile-info-element">
-                        <h2>Rated Products</h2>
-                        <span class="rated-products">
-                            <?php
-                            if (isset($_SESSION['ratedProducts'])) {
-                                echo $_SESSION['ratedProducts'];
-                            } else {
-                                echo 0;
-                            }
-                            ?>
-                        </span>
-                    </div>
-                </div>
-                <form class="logout-form" action="user_logout" method="post">
-                    <button class="logout-button" type="submit">Logout</button>
+            <div class="box product-box">
+                <h2>Add Coffee</h2>
+                <form class="product-form" action="addProduct" method="POST" enctype="multipart/form-data">
+                    <label for="name">Name</label>
+                    <input name="name" type="text" placeholder="Name" />
+                    <label for="description">Description</label>
+                    <textarea name="description" placeholder="Description"></textarea>
+                    <label for="brand">Brand</label>
+                    <input name="brand" type="text" placeholder="Brand"></input>
+                    <label for="image">Image</label>
+                    <input type="file" name="image" accept="image/*" />
+                    <button type="submit">Add</button>
+                    <?php
+                    if (isset($messages)) {
+                        foreach ($messages as $message) {
+                            echo $message;
+                        }
+                    }
+                    ?>
                 </form>
             </div>
         </div>
-    </div>
 </body>

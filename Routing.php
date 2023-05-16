@@ -2,6 +2,7 @@
 
 include_once 'src/controllers/DefaultController.php';
 include_once 'src/controllers/SecurityController.php';
+include_once 'src/controllers/CoffeeController.php';
 
 class Router
 {
