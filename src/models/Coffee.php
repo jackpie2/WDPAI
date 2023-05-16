@@ -46,6 +46,17 @@ class Coffee
         return $this->rating;
     }
 
+    public function getFormattedRating(): string
+    {
+        if ($this->rating == 0) {
+            $rating = "No rating";
+        } else {
+            $rating = $this->rating . "/5";
+        }
+
+        return $rating;
+    }
+
     public function setName(string $name): void
     {
         $this->name = $name;
@@ -94,8 +105,12 @@ class Coffee
         return $stars;
     }
 
-    public function getBrand(): ?string
+    public function getBrand(): string
     {
+        if ($this->brand == null) {
+            return "Unknown brand";
+        }
+
         return $this->brand;
     }
 

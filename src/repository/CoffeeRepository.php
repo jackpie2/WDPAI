@@ -74,4 +74,18 @@ class CoffeeRepository extends Repository
 
         return array($result, $total_pages);
     }
+
+    public function rateCoffee(int $id, int $rating, int $userID): void
+    {
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO public.rating (rated_coffee, grade, rated_by)
+            VALUES (:id, :rating, :userID)
+        ');
+
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':rating', $rating, PDO::PARAM_INT);
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
 }

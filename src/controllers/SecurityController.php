@@ -28,6 +28,7 @@ class SecurityController extends AppController
         $_SESSION["user"] = $user->getNickname();
         $_SESSION["email"] = $user->getEmail();
         $_SESSION["role"] = "user";
+        $_SESSION["id"] = $user->getId();
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/");
@@ -39,11 +40,16 @@ class SecurityController extends AppController
         session_unset();
         session_destroy();
 
-        $this->render('main');
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/");
     }
 
     public function user_register()
     {
+        if (!$this->isPost()) {
+            return $this->render('login', ['type' => 'register']);
+        }
+
         $email = $_POST['email'];
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirm-password'];
