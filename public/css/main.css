@@ -87,6 +87,12 @@
     vertical-align: middle;
 }
 
+.coffee-image {
+    width: 142px;
+    height: 142px;
+    border-radius: var(--border-radius);
+}
+
 .coffee-content {
     display: flex;
     flex-direction: column;

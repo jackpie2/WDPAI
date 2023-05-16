@@ -2,6 +2,7 @@
 
 require_once 'Repository.php';
 require_once __DIR__ . '/../models/Coffee.php';
+require_once __DIR__ . '/../models/Brand.php';
 
 class CoffeeRepository extends Repository
 {
@@ -20,10 +21,9 @@ class CoffeeRepository extends Repository
         }
 
         return new Coffee(
-            $coffee['id'],
             $coffee['name'],
             $coffee['description'],
-            $coffee['image_uuid'],
+            $coffee['image_file'],
             $coffee['rating'],
             $coffee['brand'],
             $coffee['review_count']
@@ -62,13 +62,13 @@ class CoffeeRepository extends Repository
 
         foreach ($coffee as $single_coffee) {
             $result[] = new Coffee(
-                $single_coffee['id'],
                 $single_coffee['name'],
                 $single_coffee['description'],
-                $single_coffee['image_uuid'],
+                $single_coffee['image_file'],
                 $single_coffee['rating'],
                 $single_coffee['brand'],
-                $single_coffee['review_count']
+                $single_coffee['review_count'],
+                $single_coffee['id']
             );
         }
 
@@ -87,5 +87,22 @@ class CoffeeRepository extends Repository
         $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
 
         $stmt->execute();
+    }
+
+    public function addCoffee(Coffee $coffee): void
+    {
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO public.coffee (name, description, image_file, brand)
+            VALUES (?, ?, ?, ?)
+        ');
+
+        $stmt->execute([
+            $coffee->getName(),
+            $coffee->getDescription(),
+            $coffee->getimage_file(),
+            $coffee->getBrand()
+        ]);
+
+
     }
 }

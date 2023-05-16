@@ -71,6 +71,12 @@ class DefaultController extends AppController
         $this->render('product', ['coffee' => $coffee]);
     }
 
+    public function add_product()
+    {
+        $this->redirectIfNotLoggedIn();
+        $this->render('add-product');
+    }
+
     public function profile()
     {
         $this->redirectIfNotLoggedIn();
