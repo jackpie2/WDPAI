@@ -49,8 +49,10 @@ class CoffeeController extends AppController
 
         $coffeeRepository = new CoffeeRepository();
 
-        $coffeeRepository->addCoffee($coffee);
+        $id = $coffeeRepository->addCoffee($coffee);
 
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/product?id={$id}");
     }
 
     public function validate(array $file): bool

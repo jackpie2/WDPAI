@@ -89,20 +89,23 @@ class CoffeeRepository extends Repository
         $stmt->execute();
     }
 
-    public function addCoffee(Coffee $coffee): void
+    public function addCoffee(Coffee $coffee): int
     {
         $stmt = $this->database->connect()->prepare('
             INSERT INTO public.coffee (name, description, image_file, brand)
-            VALUES (?, ?, ?, ?)
+            VALUES (:name, :description, :image_file, :brand)
+            RETURNING id
         ');
+        
+        $stmt->bindParam(':name', $coffee->getName(), PDO::PARAM_STR);
+        $stmt->bindParam(':description', $coffee->getDescription(), PDO::PARAM_STR);
+        $stmt->bindParam(':image_file', $coffee->getimage_file(), PDO::PARAM_STR);
+        $stmt->bindParam(':brand', $coffee->getBrand(), PDO::PARAM_STR);
+        
+        $stmt->execute();
 
-        $stmt->execute([
-            $coffee->getName(),
-            $coffee->getDescription(),
-            $coffee->getimage_file(),
-            $coffee->getBrand()
-        ]);
+        $id = $stmt->fetch(PDO::FETCH_ASSOC)['id'];
 
-
+        return $id;
     }
 }
