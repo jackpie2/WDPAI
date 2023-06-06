@@ -111,6 +111,14 @@ button:hover {
     flex-grow: 1;
 }
 
+.navigation-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    fill: var(--fg-default);
+}
+
 .navigation-button:hover {
     background-color: var(--bg-inset-hover);
     cursor: pointer;

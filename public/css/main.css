@@ -144,7 +144,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 2rem;
     font-size: 1.5rem;
     background-color: var(--bg-overlay);
     padding: 1rem;
@@ -158,3 +157,10 @@
     color: var(--fg-default);
     text-decoration: none;
 }
+
+.button-disabled {
+    background-color: var(--bg-inset-hover);
+    pointer-events: none;  
+    cursor: default; 
+}
+

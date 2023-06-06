@@ -18,5 +18,6 @@ Router::post('user_logout', 'SecurityController');
 Router::post('user_register', 'SecurityController');
 Router::post('rate', 'DefaultController');
 Router::post('addProduct', 'CoffeeController');
+Router::post('search', 'CoffeeController');
 
 Router::run($path);

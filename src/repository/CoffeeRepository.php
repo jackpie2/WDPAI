@@ -34,7 +34,7 @@ class CoffeeRepository extends Repository
     {
         $result = [];
 
-        $itemsPerPage = 10;
+        $itemsPerPage = 5;
 
         $page = $page - 1;
 
@@ -46,9 +46,11 @@ class CoffeeRepository extends Repository
             SELECT *, count(*) OVER() as total_pages FROM public.coffee_view
             ORDER BY id
             LIMIT :itemsPerPage
-            OFFSET :page
+            OFFSET :offset
         ');
-        $stmt->bindParam(':page', $page, PDO::PARAM_INT);
+        $offset = $page * $itemsPerPage;
+
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->bindParam(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
         $stmt->execute();
         $coffee = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -96,16 +98,43 @@ class CoffeeRepository extends Repository
             VALUES (:name, :description, :image_file, :brand)
             RETURNING id
         ');
-        
+
         $stmt->bindParam(':name', $coffee->getName(), PDO::PARAM_STR);
         $stmt->bindParam(':description', $coffee->getDescription(), PDO::PARAM_STR);
         $stmt->bindParam(':image_file', $coffee->getimage_file(), PDO::PARAM_STR);
         $stmt->bindParam(':brand', $coffee->getBrand(), PDO::PARAM_STR);
-        
+
         $stmt->execute();
 
         $id = $stmt->fetch(PDO::FETCH_ASSOC)['id'];
 
         return $id;
+    }
+
+    public function searchCoffee(string $search, int $page): ?array
+    {
+        $page = $page - 1;
+
+        $stmt = $this->database->connect()->prepare('
+            SELECT public.coffee_view.*, public.brand.name brand_name, count(*) OVER() AS total_pages FROM public.coffee_view
+            left join public.brand 
+            on brand.id = public.coffee_view.brand where LOWER(public.coffee_view.name) LIKE :search
+            ORDER BY id
+            LIMIT 5
+            OFFSET :offset
+        ');
+
+        $search = '%' . $search . '%';
+        $offset = $page * 5;
+
+        $stmt->bindParam(':search', $search, PDO::PARAM_STR);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $coffee = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $total_pages = ceil($coffee[0]['total_pages'] / 5);
+
+        return [$coffee, $total_pages];
     }
 }

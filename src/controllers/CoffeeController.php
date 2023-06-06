@@ -69,4 +69,25 @@ class CoffeeController extends AppController
 
         return true;
     }
+
+    public function search()
+    {
+        $name = $_GET['q'];
+        $page = $_GET['page'] ?? 1;
+
+        $coffeeRepository = new CoffeeRepository();
+        $coffeeList = $coffeeRepository->searchCoffee($name, $page);
+        $totalPages = $coffeeList[1];
+        $coffeeList = $coffeeList[0];
+
+        header('Content-type: application/json');
+        http_response_code(200);
+        echo json_encode(
+            [
+                'coffee' => $coffeeList,
+                'page' => $page,
+                'totalPages' => $totalPages
+            ]
+        );
+    }
 }
