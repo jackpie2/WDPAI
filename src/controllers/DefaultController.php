@@ -24,26 +24,8 @@ class DefaultController extends AppController
 
     public function main()
     {
-        $page = 1;
-        if (isset($_GET['page'])) {
-            $page = $_GET['page'];
-            if ($page < 1) {
-                $page = 1;
-            }
-        }
-
-        $coffeeRepository = new CoffeeRepository();
-        $pageData = $coffeeRepository->getAllCoffee($page);
-        $coffeeList = $pageData[0];
-        $totalPages = $pageData[1];
-
         $this->render(
-            'main',
-            [
-                'coffee' => $coffeeList,
-                'page' => $page,
-                'totalPages' => $totalPages
-            ]
+            'main'
         );
     }
 
