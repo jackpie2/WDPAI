@@ -100,27 +100,32 @@
 }
 
 .coffee-title {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .coffee-brand {
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .coffee-description {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 2;
     overflow: hidden;
 
     font-size: 1rem;
+    margin-top: 0.3rem;
+    border-top: var(--border);
+    border-top-style: dashed;
+    padding-top: 0.3rem;
 }
+
 
 .coffee-rating {
     display: flex;
     align-items: center;
     gap: 0.2rem;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .coffee-brand {
@@ -138,6 +143,17 @@
 
 .filled > svg {
     fill: var(--gold);
+}
+
+
+@media screen and (max-width: 768px) {
+    .coffee-title {
+        font-size: 1rem;
+    }
+            
+    .coffee-description {
+        display: none;
+    }
 }
 
 .no-results-box {
