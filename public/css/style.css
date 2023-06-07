@@ -124,7 +124,6 @@ button:hover {
     cursor: pointer;
 }
 
-
 nav {
     background-color: var(--bg-overlay);
     padding: 1rem;
@@ -134,6 +133,8 @@ nav {
     width: 100%;
     box-sizing: border-box;
     justify-self: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
 }
 
 nav > a {
