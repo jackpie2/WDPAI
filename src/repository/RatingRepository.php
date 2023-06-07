@@ -64,6 +64,21 @@ class RatingRepository extends Repository
 
         return $result['grade'];
     }
-}
 
-?>
+    public function getUserRatingCount(int $userID): ?int
+    {
+        $stmt = $this->database->connect()->prepare('
+            SELECT COUNT(*) FROM public.rating WHERE rated_by = :userID
+        ');
+
+        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            return null;
+        }
+
+        return $result['count'];
+    }
+}
