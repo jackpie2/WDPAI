@@ -19,10 +19,10 @@
 
 body {
     background: linear-gradient(
-        135deg,
-        #7d3c98 0%,
-        #673ab7 48.44%,
-        #430fbf 100%
+            135deg,
+            #7d3c98 0%,
+            #673ab7 48.44%,
+            #430fbf 100%
     );
 
     background-repeat: no-repeat;
@@ -175,6 +175,24 @@ nav > a:hover, nav > a > *:hover {
     box-sizing: border-box;
 
     padding: 3rem;
+}
+
+.overflow-y {
+    overflow-y: scroll;
+}
+
+#loading {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+#loading > i {
+    width: fit-content;
+    height: fit-content;
+    font-size: 3rem;
+    color: var(--fg-default);
+    margin-top: 8rem;
 }
 
 @media only screen and (max-width: 768px) {
