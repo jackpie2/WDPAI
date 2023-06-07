@@ -70,7 +70,11 @@ class DefaultController extends AppController
     public function profile()
     {
         $this->redirectIfNotLoggedIn();
-        $this->render('profile');
+
+        $ratingRepository = new RatingRepository();
+        $ratedProducts = $ratingRepository->getUserRatingCount($_SESSION['id']);
+
+        $this->render('profile', ['ratedProducts' => $ratedProducts]);
     }
 
     public function saved()

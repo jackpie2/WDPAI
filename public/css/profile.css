@@ -18,13 +18,15 @@
     align-items: center;
 }
 
-.profile-info-element > h2 {
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-}
-
 .profile-info-element > span {
     color: var(--fg-muted);
+
+}
+
+.profile-info-element > .header {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    color: var(--fg-default);
 }
 
 .profile-info {

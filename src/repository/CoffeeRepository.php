@@ -105,8 +105,8 @@ class CoffeeRepository extends Repository
         $stmt = $this->database->connect()->prepare('
             SELECT public.coffee_view.*, public.brand.name brand_name, count(*) OVER() AS total_pages FROM public.coffee_view
             left join public.brand 
-            on brand.id = public.coffee_view.brand where LOWER(public.coffee_view.name) LIKE :search
-            OR LOWER(public.brand.name) LIKE :search
+            on brand.id = public.coffee_view.brand where LOWER(public.coffee_view.name) LIKE LOWER(:search)
+            OR LOWER(public.brand.name) LIKE LOWER(:search)
             ORDER BY id
             LIMIT 5
             OFFSET :offset
