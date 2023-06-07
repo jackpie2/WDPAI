@@ -25,7 +25,7 @@
                         </path>
                     </svg>
                     <input type="text" id="search-input" placeholder="Search for a coffee or brand"
-                           onkeydown="if (event.keyCode == 13) {search();}"/>
+                           onkeydown="if (event.keyCode === 13) {search();}"/>
                 </div>
                 <button class="button search-button" onclick="search();">Search</button>
             </div>
@@ -77,9 +77,7 @@
             <div class="coffee-content">
                 <div class="coffee-title">Untitled</div>
                 <div class="coffee-brand">Unknown brand</div>
-                <div class="coffee-rating">
-
-                </div>
+                <div class="coffee-rating"></div>
                 <div class="coffee-description"></div>
             </div>
         </div>
