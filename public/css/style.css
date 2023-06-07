@@ -124,23 +124,39 @@ button:hover {
     cursor: pointer;
 }
 
+
 nav {
     background-color: var(--bg-overlay);
     padding: 1rem;
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 3rem;
     width: 100%;
     box-sizing: border-box;
     justify-self: center;
 }
 
-nav > a > svg {
+nav > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--fg-default);
     fill: var(--fg-default);
 }
 
-nav > a > svg:hover {
+nav > a:hover, nav > a > *:hover {
     fill: var(--fg-muted);
+    color: var(--fg-muted);
+}
+
+.navbar-label {
+    font-size: 1rem;
+}
+
+.navbar-label:hover {
+    color: var(--fg-muted);
 }
 
 .main-container {
@@ -169,5 +185,14 @@ nav > a > svg:hover {
 
     .box {
         padding: 1rem;
+    }
+
+    .navbar-label {
+        display: none;
+    }
+
+    nav > a > svg {
+        width: 32px;
+        height: 32px;
     }
 }
