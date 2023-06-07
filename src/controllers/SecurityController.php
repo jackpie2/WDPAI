@@ -18,7 +18,11 @@ class SecurityController extends AppController
         $userRepository = new UserRepository();
         $user = $userRepository->getUser($_POST['email']);
 
-        if (!$user || $user->getEmail() !== $email || $user->getPassword() !== md5($password)) {
+        $hash = password_hash($password, PASSWORD_ARGON2ID);
+
+        $passwordMatches = password_verify($password, $user->getPassword());
+
+        if (!$user || $user->getEmail() !== $email || $passwordMatches !== true) {
             $this->render('login', ['messages' => ['Wrong email or password. Try again.']]);
             return;
         }
@@ -60,8 +64,6 @@ class SecurityController extends AppController
             return;
         }
 
-        // check if the user already exists
-
         $userRepository = new UserRepository();
 
         $user = $userRepository->getUser($email);
@@ -71,7 +73,9 @@ class SecurityController extends AppController
             return;
         }
 
-        $newUser = new User($email, $password, $nickname);
+        $hashedPassword = password_hash($password, PASSWORD_ARGON2ID);
+
+        $newUser = new User($email, $hashedPassword, $nickname);
 
         $userRepository->addUser($newUser);
 
