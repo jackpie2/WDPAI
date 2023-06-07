@@ -13,11 +13,15 @@ class Coffee
     private $review_count;
 
     public function __construct(
-        string $name, string $description,
-        ?string $image_file, ?float $rating,
-        ?string $brand, int $review_count,
-        ?int $id = null
-    ) {
+        string  $name,
+        string  $description,
+        ?string $image_file,
+        ?float  $rating,
+        ?string $brand,
+        int     $review_count,
+        ?int    $id = null
+    )
+    {
         $this->name = $name;
         $this->description = $description;
         $this->image_file = $image_file;
@@ -27,14 +31,14 @@ class Coffee
         $this->id = $id;
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 
     public function getimage_file(): ?string
@@ -42,9 +46,19 @@ class Coffee
         return $this->image_file;
     }
 
+    public function setimage_file(string $image_file): void
+    {
+        $this->image_file = $image_file;
+    }
+
     public function getRating(): ?float
     {
         return $this->rating;
+    }
+
+    public function setRating(int $rating): void
+    {
+        $this->rating = $rating;
     }
 
     public function getFormattedRating(): string
@@ -56,26 +70,6 @@ class Coffee
         }
 
         return $rating;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
-    }
-
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    public function setimage_file(string $image_file): void
-    {
-        $this->image_file = $image_file;
-    }
-
-    public function setRating(int $rating): void
-    {
-        $this->rating = $rating;
     }
 
     public function getRatingStars(): string
@@ -106,21 +100,7 @@ class Coffee
         return $stars;
     }
 
-    public function getBrand(): string
-    {
-        if ($this->brand == null) {
-            return "Unknown brand";
-        }
-
-        return $this->brand;
-    }
-
-    public function setBrand(string $brand): void
-    {
-        $this->brand = $brand;
-    }
-
-    public function getReview_count(): int
+    public function getReviewCount(): int
     {
         return $this->review_count;
     }
@@ -140,5 +120,29 @@ class Coffee
         }
 
         return $brand->getName();
+    }
+
+    public function getBrand(): string
+    {
+        if ($this->brand == null) {
+            return "Unknown brand";
+        }
+
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): void
+    {
+        $this->brand = $brand;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
     }
 }

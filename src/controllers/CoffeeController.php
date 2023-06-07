@@ -17,7 +17,14 @@ class CoffeeController extends AppController
     public function addProduct()
     {
         if (!$this->isPost()) {
-            return $this->render('login');
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/");
+            return;
+        }
+
+        if (!isset($_SESSION['id'])) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/login");
         }
 
         if (is_uploaded_file($_FILES['image']['tmp_name']) && $this->validate($_FILES['image'])) {
@@ -89,5 +96,37 @@ class CoffeeController extends AppController
                 'totalPages' => $totalPages
             ]
         );
+    }
+
+    public function rateProduct()
+    {
+        if (!$this->isPost()) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/");
+            return;
+        }
+
+        session_start();
+
+        if (!isset($_SESSION['id'])) {
+            http_response_code(401);
+            return;
+        }
+
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        if (!isset($data['rating']) || !isset($data['coffeeID'])) {
+            http_response_code(404);
+            return;
+        }
+
+        $userID = $_SESSION['id'];
+        $rating = $data['rating'];
+        $coffeeID = $data['coffeeID'];
+
+        $ratingRepository = new RatingRepository();
+        $ratingRepository->rateCoffee($coffeeID, $rating, $userID);
+
+        http_response_code(200);
     }
 }
