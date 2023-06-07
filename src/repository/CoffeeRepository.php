@@ -16,7 +16,7 @@ class CoffeeRepository extends Repository
 
         $coffee = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($coffee == false) {
+        if (!$coffee) {
             return null;
         }
 
@@ -77,19 +77,6 @@ class CoffeeRepository extends Repository
         return array($result, $total_pages);
     }
 
-    public function rateCoffee(int $id, int $rating, int $userID): void
-    {
-        $stmt = $this->database->connect()->prepare('
-            INSERT INTO public.rating (rated_coffee, grade, rated_by)
-            VALUES (:id, :rating, :userID)
-        ');
-
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':rating', $rating, PDO::PARAM_INT);
-        $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
-
-        $stmt->execute();
-    }
 
     public function addCoffee(Coffee $coffee): int
     {
@@ -119,6 +106,7 @@ class CoffeeRepository extends Repository
             SELECT public.coffee_view.*, public.brand.name brand_name, count(*) OVER() AS total_pages FROM public.coffee_view
             left join public.brand 
             on brand.id = public.coffee_view.brand where LOWER(public.coffee_view.name) LIKE :search
+            OR LOWER(public.brand.name) LIKE :search
             ORDER BY id
             LIMIT 5
             OFFSET :offset

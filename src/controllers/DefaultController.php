@@ -3,6 +3,7 @@
 require_once 'AppController.php';
 require_once __DIR__ . '/../models/Coffee.php';
 require_once __DIR__ . '/../repository/CoffeeRepository.php';
+require_once __DIR__ . '/../repository/RatingRepository.php';
 
 class DefaultController extends AppController
 {
@@ -50,7 +51,14 @@ class DefaultController extends AppController
             return;
         }
 
-        $this->render('product', ['coffee' => $coffee]);
+        if ($this->isLoggedIn()) {
+            $ratingRepository = new RatingRepository();
+            $userRating = $ratingRepository->getUserRating($id, $_SESSION['id']);
+            $this->render('product', ['coffee' => $coffee, 'userRating' => $userRating, 'loggedIn' => true]);
+            return;
+        }
+
+        $this->render('product', ['coffee' => $coffee, 'userRating' => null, 'loggedIn' => false]);
     }
 
     public function add_product()
@@ -69,36 +77,5 @@ class DefaultController extends AppController
     {
         $this->redirectIfNotLoggedIn();
         $this->render('saved-products');
-    }
-
-    public function rate()
-    {
-        if (!$this->isLoggedIn()) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/login");
-            return;
-        }
-
-        if (!$this->isPost()) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/");
-            return;
-        }
-
-        $id = $_POST['id'];
-        $coffeeRepository = new CoffeeRepository();
-
-        $coffee = $coffeeRepository->getCoffee($id);
-
-        if ($coffee == null) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/");
-            return;
-        }
-
-        $rating = $_POST['rating'];
-        $userID = $_SESSION['id'];
-
-        $coffeeRepository->rateCoffee($id, $rating, $userID);
     }
 }

@@ -141,8 +141,8 @@
     fill: var(--fg-muted);
 }
 
-.filled > svg {
-    fill: var(--gold);
+.filled > svg, .filled {
+    fill: var(--gold) !important;
 }
 
 
@@ -180,3 +180,12 @@
     cursor: default; 
 }
 
+.review-count {
+    margin-left: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.review-count > svg {
+    fill: var(--fg-muted);
+    vertical-align: middle;
+}
