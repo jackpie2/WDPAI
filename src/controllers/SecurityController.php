@@ -18,11 +18,14 @@ class SecurityController extends AppController
         $userRepository = new UserRepository();
         $user = $userRepository->getUser($_POST['email']);
 
-        $hash = password_hash($password, PASSWORD_ARGON2ID);
+        if (!$user || $user->getEmail() !== $email) {
+            $this->render('login', ['messages' => ['Wrong email or password. Try again.']]);
+            return;
+        }
 
         $passwordMatches = password_verify($password, $user->getPassword());
 
-        if (!$user || $user->getEmail() !== $email || $passwordMatches !== true) {
+        if (!$passwordMatches) {
             $this->render('login', ['messages' => ['Wrong email or password. Try again.']]);
             return;
         }
@@ -31,7 +34,7 @@ class SecurityController extends AppController
 
         $_SESSION["user"] = $user->getNickname();
         $_SESSION["email"] = $user->getEmail();
-        $_SESSION["role"] = "user";
+        $_SESSION["role"] = $user->getRole();
         $_SESSION["id"] = $user->getId();
 
         $url = "http://$_SERVER[HTTP_HOST]";

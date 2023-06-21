@@ -25,6 +25,8 @@ class DefaultController extends AppController
 
     public function main()
     {
+        $this->isLoggedIn();
+
         $this->render(
             'main'
         );
@@ -64,7 +66,12 @@ class DefaultController extends AppController
     public function add_product()
     {
         $this->redirectIfNotLoggedIn();
-        $this->render('add-product');
+        if ($this->hasRole(2)) {
+            $this->render('add-product');
+        } else {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/");
+        }
     }
 
     public function profile()

@@ -42,6 +42,18 @@
                         ?>
                     </span>
                 </div>
+                <div class="profile-info-element">
+                    <span class="header">Role</span>
+                    <span class="average-rating">
+                        <?php
+                        if ($_SESSION['role'] === 2) {
+                            echo 'Admin';
+                        } else {
+                            echo 'User';
+                        }
+                        ?>
+                    </span>
+                </div>
             </div>
             <form class="logout-form" action="user_logout" method="post">
                 <button class="logout-button" type="submit">Logout</button>
