@@ -15,7 +15,9 @@
                             <div class=\"message\">
                                 <div class=\"message-content\">
                                     <span>$message</span>
-                                    <button class=\"message-close-button\">X</button>
+                                    <button class=\"message-close-button\" 
+                                    onclick=\"this.parentElement.parentElement.style.display='none';\"
+                                    >X</button>
                                 </div>
                             </div>
                         ";
