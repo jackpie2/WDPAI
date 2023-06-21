@@ -19,6 +19,14 @@ class AppController
         return $this->request === 'POST';
     }
 
+    protected function redirectIfNotLoggedIn()
+    {
+        if (!$this->isLoggedIn()) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/login");
+        }
+    }
+
     protected function isLoggedIn(): bool
     {
         session_start();
@@ -26,12 +34,13 @@ class AppController
         return isset($_SESSION['user']);
     }
 
-    protected function redirectIfNotLoggedIn()
+    protected function hasRole($role): bool
     {
         if (!$this->isLoggedIn()) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/login");
+            return false;
         }
+
+        return $_SESSION['role'] === $role;
     }
 
     protected function render(string $template = null, array $variables = [])
@@ -46,7 +55,7 @@ class AppController
             ob_start();
             include $templatePath;
             $output = ob_get_clean();
-        };
+        }
 
         print $output;
     }
