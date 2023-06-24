@@ -20,6 +20,20 @@ class RatingRepository extends Repository
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result != false) {
+            if ($result['grade'] == $rating) {
+                $stmt = $this->database->connect()->prepare('
+                    DELETE FROM public.rating WHERE rated_coffee = :id AND rated_by = :userID
+                ');
+
+                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+
+                $stmt->execute();
+
+                return;
+            }
+
+
             $stmt = $this->database->connect()->prepare('
                 UPDATE public.rating SET grade = :rating WHERE rated_coffee = :id AND rated_by = :userID
             ');

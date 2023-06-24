@@ -20,8 +20,7 @@ class Coffee
         ?string $brand,
         int     $review_count,
         ?int    $id = null
-    )
-    {
+    ) {
         $this->name = $name;
         $this->description = $description;
         $this->image_file = $image_file;
@@ -75,7 +74,7 @@ class Coffee
     public function getRatingStars(): string
     {
         $stars = "";
-        for ($i = 0; $i < $this->rating; $i++) {
+        for ($i = 1; $i <= $this->rating; $i++) {
             $stars .= '
             <div class="star filled">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
@@ -85,8 +84,8 @@ class Coffee
             ';
         }
 
-        if ($i < 5) {
-            for ($i; $i < 5; $i++) {
+        if ($i <= 5) {
+            for ($i; $i <= 5; $i++) {
                 $stars .= '
                 <div class="star">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
