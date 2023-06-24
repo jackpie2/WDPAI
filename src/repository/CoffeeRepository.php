@@ -125,4 +125,99 @@ class CoffeeRepository extends Repository
 
         return [$coffee, $total_pages];
     }
+
+    public function handleBookmark(int $coffee_id, int $user_id): void
+    {
+        if ($this->isBookmarked($coffee_id, $user_id)) {
+            $this->removeBookmark($coffee_id, $user_id);
+        } else {
+            $this->addBookmark($coffee_id, $user_id);
+        }
+    }
+
+    public function removeBookmark(int $coffee_id, int $user_id): void
+    {
+        $stmt = $this->database->connect()->prepare('
+            DELETE FROM public.bookmarks
+            WHERE user_id = :user_id AND coffee_id = :coffee_id
+        ');
+
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':coffee_id', $coffee_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
+    public function addBookmark(int $coffee_id, int $user_id): void
+    {
+        $stmt = $this->database->connect()->prepare('
+            INSERT INTO public.bookmarks (user_id, coffee_id)
+            VALUES (:user_id, :coffee_id)
+        ');
+
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':coffee_id', $coffee_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+    }
+
+    public function isBookmarked(int $coffee_id, int $user_id): bool
+    {
+        $stmt = $this->database->connect()->prepare('
+            SELECT * FROM public.bookmarks
+            WHERE user_id = :user_id AND coffee_id = :coffee_id
+        ');
+
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':coffee_id', $coffee_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result == false) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getBookmarks(int $user_id): ?array
+    {
+        $stmt = $this->database->connect()->prepare('
+            SELECT public.coffee_view.*, public.brand.name brand_name FROM public.coffee_view
+            left join public.brand 
+            on brand.id = public.coffee_view.brand
+            WHERE public.coffee_view.id IN (
+                SELECT coffee_id FROM public.bookmarks
+                WHERE user_id = :user_id
+            )
+        ');
+
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $coffee = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($coffee == false) {
+            return null;
+        }
+
+        $result = [];
+
+        foreach ($coffee as $single_coffee) {
+            $result[] = new Coffee(
+                $single_coffee['name'],
+                $single_coffee['description'],
+                $single_coffee['image_file'],
+                $single_coffee['rating'],
+                $single_coffee['brand'],
+                $single_coffee['review_count'],
+                $single_coffee['id']
+            );
+        }
+
+        return $result;
+    }
 }

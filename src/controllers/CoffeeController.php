@@ -129,4 +129,35 @@ class CoffeeController extends AppController
 
         http_response_code(200);
     }
+
+    public function bookmarkProduct()
+    {
+        if (!$this->isPost()) {
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/");
+            return;
+        }
+
+        session_start();
+
+        if (!isset($_SESSION['id'])) {
+            http_response_code(401);
+            return;
+        }
+
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        if (!isset($data['coffeeID'])) {
+            http_response_code(404);
+            return;
+        }
+
+        $userID = $_SESSION['id'];
+        $coffeeID = $data['coffeeID'];
+
+        $coffeeRepository = new CoffeeRepository();
+        $coffeeRepository->handleBookmark($coffeeID, $userID);
+
+        http_response_code(200);
+    }
 }

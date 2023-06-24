@@ -183,9 +183,11 @@
 .review-count {
     margin-left: 0.4rem;
     font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
 }
 
 .review-count > svg {
     fill: var(--fg-muted);
-    vertical-align: middle;
 }

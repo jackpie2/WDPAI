@@ -17,3 +17,13 @@
 .bookmark-container > a > svg:hover {
     fill: var(--fg-muted);
 }
+
+.no-saved-products {
+    background-color: var(--bg-overlay);
+    border-radius: var(--border-radius);
+    border: var(--border);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

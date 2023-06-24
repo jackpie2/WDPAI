@@ -56,11 +56,12 @@ class DefaultController extends AppController
         if ($this->isLoggedIn()) {
             $ratingRepository = new RatingRepository();
             $userRating = $ratingRepository->getUserRating($id, $_SESSION['id']);
-            $this->render('product', ['coffee' => $coffee, 'userRating' => $userRating, 'loggedIn' => true]);
+            $isBookmarked = $coffeeRepository->isBookmarked($id, $_SESSION['id']);
+            $this->render('product', ['coffee' => $coffee, 'userRating' => $userRating, 'loggedIn' => true, 'isBookmarked' => $isBookmarked]);
             return;
         }
 
-        $this->render('product', ['coffee' => $coffee, 'userRating' => null, 'loggedIn' => false]);
+        $this->render('product', ['coffee' => $coffee, 'userRating' => null, 'loggedIn' => false, 'isBookmarked' => null]);
     }
 
     public function add_product()
@@ -87,6 +88,10 @@ class DefaultController extends AppController
     public function saved()
     {
         $this->redirectIfNotLoggedIn();
-        $this->render('saved-products');
+
+        $coffeeRepository = new CoffeeRepository();
+        $savedProducts = $coffeeRepository->getBookmarks($_SESSION['id']);
+
+        $this->render('saved-products', ['savedProducts' => $savedProducts]);
     }
 }
