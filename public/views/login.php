@@ -94,4 +94,5 @@
             <img src="public/img/logo.png" class="logo-large" alt="logo" />
         </div>
     </div>
+    <?php require_once __DIR__ . '/../templates/footer.php'; ?>
 </body>
