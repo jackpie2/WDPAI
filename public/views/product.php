@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="public/css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="public/css/product.css"/>
-    <link rel="stylesheet" type="text/css" href="public/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="public/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/product.css" />
+    <link rel="stylesheet" type="text/css" href="public/css/main.css" />
     <title>BrewReview</title>
     <script src="public/js/rate.js"></script>
 </head>
 
 <body>
-<div class="main-container">
-    <?php require_once __DIR__ . '/../templates/navbar.php'; ?>
-    <div class="content-container">
-        <div class="box product-box">
-            <?php
-            if ($coffee === null) {
-                echo "
+    <div class="main-container">
+        <?php require_once __DIR__ . '/../templates/navbar.php'; ?>
+        <div class="content-container">
+            <div class="box product-box">
+                <?php
+                if ($coffee === null) {
+                    echo "
                         <div class=\"no-results-box\">
                             No results found.
                         </div>
                         ";
 
-                return;
-            }
+                    return;
+                }
 
-            $stars = $coffee->getRatingStars();
-            $rating = $coffee->getFormattedRating();
-            $name = $coffee->getName();
-            $description = $coffee->getDescription();
-            $brand = $coffee->getBrandName();
-            $review_count = $coffee->getReviewCount();
+                $stars = $coffee->getRatingStars();
+                $rating = $coffee->getFormattedRating();
+                $name = $coffee->getName();
+                $description = $coffee->getDescription();
+                $brand = $coffee->getBrandName();
+                $review_count = $coffee->getReviewCount();
 
-            $image_file = $coffee->getimage_file();
-            $id = $coffee->getId();
-            echo "
+                $image_file = $coffee->getimage_file();
+                $id = $coffee->getId();
+                echo "
                         <div class=\"coffee-header\">
                         <div class=\"coffee-image\">
                             <img src=\"public/uploads/$image_file\" alt=\"coffe image\" />
@@ -46,8 +46,8 @@
                             </div>
                         </div>";
 
-            if (isset($_SESSION['id'])) {
-                echo "
+                if (isset($_SESSION['id'])) {
+                    echo "
                         <div class=\"actions-menu\">
                             <div class=\"stars\">
                                 <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" onclick=\"rate(1);\" class=\"filled\">
@@ -72,17 +72,16 @@
                                 </svg>
                             </div>
                         </div>";
-            }
+                }
 
-            echo "
-                        
+                echo "  
                     </div>
                 </div>";
 
-            if (
-                isset($_SESSION['id'])
-            ) {
-                echo "
+                if (
+                    isset($_SESSION['id'])
+                ) {
+                    echo "
                 <div class=\"box product-box actions-mobile-box\">
                     <div class=\"stars stars-mobile\">
                       <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" onclick=\"rate(1);\" class=\"filled\">
@@ -107,13 +106,18 @@
                         </svg>
                     </div>
                 </div>";
+                }
 
-            }
-
-            echo "
+                echo "
                 
-                <div class=\"box product-box\">$description</div>
                 <div class=\"box product-box\">
+                    <h3>Description</h3>
+                    <p>
+                        $description
+                    </p>
+                </div>
+                <div class=\"box product-box\">
+                    <h3>Tags</h3>
                     <div class=\"tags\">
                         <div class=\"tag\">tag</div>
                         <div class=\"tag\">tag</div>
@@ -122,14 +126,15 @@
                 </div>
                 ";
 
-            echo "
+                echo "
             
                 <script>
                     updateStars($userRating)
                 </script>
                 ";
-            ?>
+                ?>
 
+            </div>
         </div>
-    </div>
+        <?php require_once __DIR__ . '/../templates/footer.php'; ?>
 </body>
