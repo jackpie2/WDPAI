@@ -20,5 +20,6 @@ Router::post('rate', 'DefaultController');
 Router::post('addProduct', 'CoffeeController');
 Router::post('search', 'CoffeeController');
 Router::post('rateProduct', 'CoffeeController');
+Router::post('bookmarkProduct', 'CoffeeController');
 
 Router::run($path);
