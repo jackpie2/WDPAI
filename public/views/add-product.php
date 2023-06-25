@@ -21,6 +21,8 @@
                     <textarea name="description" placeholder="Description"></textarea>
                     <label for="brand">Brand</label>
                     <input name="brand" type="text" placeholder="Brand"></input>
+                    <label for="tags">Tags</label>
+                    <input name="tags" type="text" placeholder="Tags, seperated by spaces."></input>
                     <label for="image">Image</label>
                     <input type="file" name="image" accept="image/*" />
                     <button type="submit">Add</button>
