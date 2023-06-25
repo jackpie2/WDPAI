@@ -25,7 +25,7 @@
     font-size: 1rem;
 }
 
-.actions-menu {
+#actions-menu {
     justify-self: flex-end;
     display: flex;
     gap: 1rem;
@@ -65,7 +65,7 @@
     fill: var(--purple);
 }
 
-.actions-mobile-box {
+#actions-mobile-box {
     display: none;
 }
 
@@ -86,11 +86,11 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .actions-menu {
+    #actions-menu {
         display: none;
     }
 
-    .actions-mobile-box {
+    #actions-mobile-box {
         display: flex;
         gap: 1rem;
         justify-content: center;

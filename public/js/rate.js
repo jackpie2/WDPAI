@@ -16,40 +16,27 @@ function rate(rating) {
         console.log(response);
     });
 
+    const filledStarsCount = document
+        .getElementById("actions-menu")
+        .getElementsByClassName("filled").length;
+
+    if (filledStarsCount == rating) {
+        rating = 0;
+    }
+
     updateStars(rating);
 }
 
 function updateStars(rating) {
     const stars = document.querySelectorAll(".stars svg");
-    const filledStarsCount = document.querySelectorAll(
-        "div.stars > svg.filled"
-    ).length;
     const starsMobile = document.querySelectorAll(".stars-mobile svg");
 
-    console.log(document.querySelectorAll("div.stars svg.filled"));
-
-    if (filledStarsCount / 2 == rating) {
-        for (let i = 0; i < stars.length; i++) {
-            stars[i].classList.remove("filled");
-        }
-        for (let i = 0; i < stars.length; i++) {
-            starsMobile[i].classList.remove("filled");
-        }
-        return;
-    }
-
-    for (let i = 0; i < stars.length; i++) {
+    for (let i = 0; i < 5; i++) {
         if (i < rating) {
             stars[i].classList.add("filled");
-        } else {
-            stars[i].classList.remove("filled");
-        }
-    }
-
-    for (let i = 0; i < starsMobile.length; i++) {
-        if (i < rating) {
             starsMobile[i].classList.add("filled");
         } else {
+            stars[i].classList.remove("filled");
             starsMobile[i].classList.remove("filled");
         }
     }
