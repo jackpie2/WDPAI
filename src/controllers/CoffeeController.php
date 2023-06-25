@@ -4,6 +4,7 @@ require_once 'AppController.php';
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../repository/UserRepository.php';
 require_once __DIR__ . '/../repository/BrandRepository.php';
+require_once __DIR__ . '/../repository/TagRepository.php';
 
 class CoffeeController extends AppController
 {
@@ -22,13 +23,9 @@ class CoffeeController extends AppController
             return;
         }
 
-        if (!isset($_SESSION['id'])) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/login");
-        }
+        $this->redirectIfNotLoggedIn();
 
         if (is_uploaded_file($_FILES['image']['tmp_name']) && $this->validate($_FILES['image'])) {
-
             $uuid = uniqid();
             $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             $newImageFileName = $uuid . "." . $extension;
@@ -42,6 +39,13 @@ class CoffeeController extends AppController
         $name = $_POST['name'];
         $description = $_POST['description'];
         $brand = $_POST['brand'];
+
+        if (empty($name) || empty($description) || empty($brand)) {
+            $this->render('add-product', ['messages' => ['You have to fill all fields.']]);
+            return;
+        }
+
+        $tags = explode(" ", $_POST['tags']);
 
         $brand_id = (new BrandRepository())->getBrandId($brand);
 
@@ -57,6 +61,11 @@ class CoffeeController extends AppController
         $coffeeRepository = new CoffeeRepository();
 
         $id = $coffeeRepository->addCoffee($coffee);
+
+        if (count($tags) > 0) {
+            $tagRepository = new TagRepository();
+            $tagRepository->tagCoffee($tags, $id);
+        }
 
         $url = "http://$_SERVER[HTTP_HOST]";
         header("Location: {$url}/product?id={$id}");

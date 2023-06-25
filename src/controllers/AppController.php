@@ -29,7 +29,9 @@ class AppController
 
     protected function isLoggedIn(): bool
     {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
         return isset($_SESSION['user']);
     }

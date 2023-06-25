@@ -4,13 +4,15 @@ require_once 'AppController.php';
 require_once __DIR__ . '/../models/Coffee.php';
 require_once __DIR__ . '/../repository/CoffeeRepository.php';
 require_once __DIR__ . '/../repository/RatingRepository.php';
+require_once __DIR__ . '/../repository/TagRepository.php';
 
 class DefaultController extends AppController
 {
     public function login()
     {
         if ($this->isLoggedIn()) {
-            $this->render('profile');
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/profile");
         }
         $this->render('login', ['type' => 'login']);
     }
@@ -18,7 +20,8 @@ class DefaultController extends AppController
     public function register()
     {
         if ($this->isLoggedIn()) {
-            $this->render('profile');
+            $url = "http://$_SERVER[HTTP_HOST]";
+            header("Location: {$url}/profile");
         }
         $this->render('login', ['type' => 'register']);
     }
@@ -47,6 +50,9 @@ class DefaultController extends AppController
         $coffeeRepository = new CoffeeRepository();
         $coffee = $coffeeRepository->getCoffee($id);
 
+        $tagRepository = new TagRepository();
+        $tags = $tagRepository->getTags($id);
+
         if ($coffee == null) {
             $url = "http://$_SERVER[HTTP_HOST]";
             header("Location: {$url}/");
@@ -61,7 +67,7 @@ class DefaultController extends AppController
             return;
         }
 
-        $this->render('product', ['coffee' => $coffee, 'userRating' => null, 'loggedIn' => false, 'isBookmarked' => null]);
+        $this->render('product', ['coffee' => $coffee, 'userRating' => null, 'loggedIn' => false, 'isBookmarked' => null, 'tags' => $tags]);
     }
 
     public function add_product()
