@@ -29,9 +29,9 @@
         <div class="login-box box">
             <form class="login-form" action="<?php
                                                 if (isset($type) && $type === 'register') {
-                                                    echo "user_register";
+                                                    echo "userRegister";
                                                 } else {
-                                                    echo "user_login";
+                                                    echo "userLogin";
                                                 }
                                                 ?>" method="post">
                 <?php

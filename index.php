@@ -10,12 +10,12 @@ Router::get('login', 'DefaultController');
 Router::get('product', 'DefaultController');
 Router::get('profile', 'DefaultController');
 Router::get('saved', 'DefaultController');
-Router::get('add_product', 'DefaultController');
+Router::get('addProduct', 'DefaultController');
 Router::get('', 'DefaultController');
 
-Router::post('user_login', 'SecurityController');
-Router::post('user_logout', 'SecurityController');
-Router::post('user_register', 'SecurityController');
+Router::post('userLogin', 'SecurityController');
+Router::post('userLogout', 'SecurityController');
+Router::post('userRegister', 'SecurityController');
 Router::post('rate', 'DefaultController');
 Router::post('addProduct', 'CoffeeController');
 Router::post('search', 'CoffeeController');

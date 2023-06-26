@@ -11,8 +11,6 @@ function bookmark() {
         body: JSON.stringify({
             coffeeID: coffeeID,
         }),
-    }).then(function (response) {
-        console.log(response);
     });
 
     updateBookmark();
@@ -20,8 +18,6 @@ function bookmark() {
 
 function updateBookmark() {
     const bookmark = document.getElementsByClassName("bookmark");
-
-    console.log(bookmark);
 
     for (let i = 0; i < bookmark.length; i++) {
         if (bookmark[i].classList.contains("bookmarked")) {

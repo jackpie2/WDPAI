@@ -12,8 +12,6 @@ function rate(rating) {
             coffeeID: coffeeID,
             rating: rating,
         }),
-    }).then(function (response) {
-        console.log(response);
     });
 
     const filledStarsCount = document
