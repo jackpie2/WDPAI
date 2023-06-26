@@ -18,44 +18,44 @@
                         <span class="header">Username</span>
                         <span class="username">
                             <?php
-                        if (isset($_SESSION['user'])) {
-                            echo $_SESSION['user'];
-                        }
-                        ?>
+                            if (isset($_SESSION['user'])) {
+                                echo $_SESSION['user'];
+                            }
+                            ?>
                         </span>
                     </div>
                     <div class="profile-info-element">
                         <span class="header">Email</span>
                         <span class="email">
                             <?php
-                        if (isset($_SESSION['email'])) {
-                            echo $_SESSION['email'];
-                        }
-                        ?>
+                            if (isset($_SESSION['email'])) {
+                                echo $_SESSION['email'];
+                            }
+                            ?>
                         </span>
                     </div>
                     <div class="profile-info-element">
                         <span class="header">Rated Products</span>
                         <span class="rated-products">
                             <?php
-                        echo $ratedProducts;
-                        ?>
+                            echo $ratedProducts;
+                            ?>
                         </span>
                     </div>
                     <div class="profile-info-element">
                         <span class="header">Role</span>
                         <span class="average-rating">
                             <?php
-                        if ($_SESSION['role'] === 2) {
-                            echo 'Admin';
-                        } else {
-                            echo 'User';
-                        }
-                        ?>
+                            if ($_SESSION['role'] === 2) {
+                                echo 'Admin';
+                            } else {
+                                echo 'User';
+                            }
+                            ?>
                         </span>
                     </div>
                 </div>
-                <form class="logout-form" action="user_logout" method="post">
+                <form class="logout-form" action="userLogout" method="post">
                     <button class="logout-button" type="submit">Logout</button>
                 </form>
             </div>

@@ -30,54 +30,6 @@ class CoffeeRepository extends Repository
         );
     }
 
-    public function getAllCoffee(int $page): ?array
-    {
-        $result = [];
-
-        $itemsPerPage = 5;
-
-        $page = $page - 1;
-
-        if ($page < 0) {
-            $page = 0;
-        }
-
-        $stmt = $this->database->connect()->prepare('
-            SELECT *, count(*) OVER() as total_pages FROM public.coffee_view
-            ORDER BY id
-            LIMIT :itemsPerPage
-            OFFSET :offset
-        ');
-        $offset = $page * $itemsPerPage;
-
-        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-        $stmt->bindParam(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
-        $stmt->execute();
-        $coffee = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if ($coffee == false) {
-            return null;
-        }
-
-        $total_pages = $coffee[0]['total_pages'];
-        $total_pages = ceil($total_pages / $itemsPerPage);
-
-        foreach ($coffee as $single_coffee) {
-            $result[] = new Coffee(
-                $single_coffee['name'],
-                $single_coffee['description'],
-                $single_coffee['image_file'],
-                $single_coffee['rating'],
-                $single_coffee['brand'],
-                $single_coffee['review_count'],
-                $single_coffee['id']
-            );
-        }
-
-        return array($result, $total_pages);
-    }
-
-
     public function addCoffee(Coffee $coffee): int
     {
         $stmt = $this->database->connect()->prepare('

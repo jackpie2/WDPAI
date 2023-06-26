@@ -63,14 +63,14 @@ class DefaultController extends AppController
             $ratingRepository = new RatingRepository();
             $userRating = $ratingRepository->getUserRating($id, $_SESSION['id']);
             $isBookmarked = $coffeeRepository->isBookmarked($id, $_SESSION['id']);
-            $this->render('product', ['coffee' => $coffee, 'userRating' => $userRating, 'loggedIn' => true, 'isBookmarked' => $isBookmarked]);
+            $this->render('product', ['coffee' => $coffee, 'userRating' => $userRating, 'loggedIn' => true, 'isBookmarked' => $isBookmarked, 'tags' => $tags]);
             return;
         }
 
         $this->render('product', ['coffee' => $coffee, 'userRating' => null, 'loggedIn' => false, 'isBookmarked' => null, 'tags' => $tags]);
     }
 
-    public function add_product()
+    public function addProduct()
     {
         $this->redirectIfNotLoggedIn();
         if ($this->hasRole(2)) {

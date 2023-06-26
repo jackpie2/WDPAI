@@ -13,16 +13,6 @@
         <div class="content-container">
             <div class="coffee-list">
                 <?php
-                // $stars = $coffee->getRatingStars();
-                // $rating = $coffee->getFormattedRating();
-                // $name = $coffee->getName();
-                // $description = $coffee->getDescription();
-                // $brand = $coffee->getBrandName();
-                // $review_count = $coffee->getReviewCount();
-
-                // $image_file = $coffee->getimage_file();
-                // $id = $coffee->getId();
-
                 if ($savedProducts == null) {
                     echo "<div class='no-saved-products'>You have no saved products</div>";
                 } else {
@@ -52,7 +42,6 @@
                         </a>";
                     };
                 }
-
                 ?>
             </div>
         </div>

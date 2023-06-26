@@ -26,15 +26,12 @@
                 }
 
                 $stars = $coffee->getRatingStars();
-                $rating = $coffee->getFormattedRating();
                 $name = $coffee->getName();
                 $description = $coffee->getDescription();
                 $brand = $coffee->getBrandName();
                 $review_count = $coffee->getReviewCount();
-
                 $image_file = $coffee->getimage_file();
                 $id = $coffee->getId();
-
                 $bookmarkedClass = $isBookmarked ? 'bookmarked' : '';
 
                 echo "
@@ -123,8 +120,6 @@
                         $description
                     </p>
                 </div>";
-
-
 
                 echo "
                 <div class='box product-box'>

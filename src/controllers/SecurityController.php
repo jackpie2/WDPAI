@@ -6,7 +6,7 @@ require_once __DIR__ . '/../repository/UserRepository.php';
 
 class SecurityController extends AppController
 {
-    public function user_login()
+    public function userLogin()
     {
         if (!$this->isPost()) {
             return $this->render('login');
@@ -41,7 +41,7 @@ class SecurityController extends AppController
         header("Location: {$url}/");
     }
 
-    public function user_logout()
+    public function userLogout()
     {
         session_start();
         session_unset();
@@ -51,7 +51,7 @@ class SecurityController extends AppController
         header("Location: {$url}/");
     }
 
-    public function user_register()
+    public function userRegister()
     {
         if (!$this->isPost()) {
             return $this->render('login', ['type' => 'register']);
@@ -61,6 +61,11 @@ class SecurityController extends AppController
         $password = $_POST['password'];
         $confirmPassword = $_POST['confirm-password'];
         $nickname = $_POST['nickname'];
+
+        if (empty($email) || empty($password) || empty($confirmPassword) || empty($nickname)) {
+            $this->render('login', ['messages' => ['Fill all the fields.'], 'type' => 'register']);
+            return;
+        }
 
         if ($password !== $confirmPassword) {
             $this->render('login', ['messages' => ['Passwords are not the same. Try again.'], 'type' => 'register']);
